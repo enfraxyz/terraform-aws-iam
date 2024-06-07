@@ -3,7 +3,7 @@ module "wrapper" {
 
   for_each = var.items
 
-  admin_role_name                         = try(each.value.admin_role_name, var.defaults.admin_role_name, "admin")
+  admin_role_name                         = try(each.value.admin_role_name, var.defaults.admin_role_name, "adminnnn")
   admin_role_path                         = try(each.value.admin_role_path, var.defaults.admin_role_path, "/")
   admin_role_permissions_boundary_arn     = try(each.value.admin_role_permissions_boundary_arn, var.defaults.admin_role_permissions_boundary_arn, "")
   admin_role_policy_arns                  = try(each.value.admin_role_policy_arns, var.defaults.admin_role_policy_arns, ["arn:aws:iam::aws:policy/AdministratorAccess"])
