@@ -1,8 +1,8 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0"
     }
   }
 
@@ -11,23 +11,37 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = var.aws_region
+provider "random" {}
+
+# Useless resource 1: Random string
+resource "random_string" "useless_string" {
+  length  = 16
+  special = false
+  upper   = false
 }
 
-variable "aws_region" {
-  description = "AWS region for deployments"
-  type        = string
-  default     = "us-east-1"
+# Useless resource 2: Random integer
+resource "random_integer" "meaningless_number" {
+  min = 100
+  max = 999
 }
 
-variable "project_name" {
-  description = "Name of the project"
-  type        = string
-  default     = "terraform-test"
+# Useless resource 3: Null resource (executes nothing)
+resource "null_resource" "do_nothing" {}
+
+# Useless resource 4: Local file (doesn't get used)
+resource "local_file" "dummy_file" {
+  content  = "This file is completely useless."
+  filename = "${path.module}/useless_file.txt"
 }
 
-output "project_name" {
-  description = "Outputs the project name"
-  value       = var.project_name
+# Output something meaningless
+output "random_useless_string" {
+  description = "A totally useless random string."
+  value       = random_string.useless_string.result
+}
+
+output "meaningless_number" {
+  description = "A meaningless random number."
+  value       = random_integer.meaningless_number.result
 }
