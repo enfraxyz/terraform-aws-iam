@@ -31,8 +31,8 @@ data "aws_iam_policy_document" "this" {
 
     condition {
       test     = "ForAllValues:StringEquals"
-      variable = "token.actions.githubusercontent.com:iss"
-      values   = ["https://token.actions.githubusercontent.com"]
+      variable = "${local.provider_url}:iss"
+      values   = ["https://${local.provider_url}"]
     }
 
     condition {
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "this" {
     }
 
     condition {
-      test     = "StringLike"
+      test     = var.subject_condition
       variable = "${local.provider_url}:sub"
       # Strip `repo:` to normalize for cases where users may prepend it
       values = [for subject in var.subjects : "repo:${trimprefix(subject, "repo:")}"]

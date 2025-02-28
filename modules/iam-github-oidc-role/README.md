@@ -50,7 +50,7 @@ module "iam_github_oidc_role" {
   }
 }
 ```
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -93,6 +93,7 @@ No modules.
 | <a name="input_permissions_boundary_arn"></a> [permissions\_boundary\_arn](#input\_permissions\_boundary\_arn) | Permissions boundary ARN to use for IAM role | `string` | `null` | no |
 | <a name="input_policies"></a> [policies](#input\_policies) | Policies to attach to the IAM role in `{'static_name' = 'policy_arn'}` format | `map(string)` | `{}` | no |
 | <a name="input_provider_url"></a> [provider\_url](#input\_provider\_url) | The URL of the identity provider. Corresponds to the iss claim | `string` | `"token.actions.githubusercontent.com"` | no |
+| <a name="input_subject_condition"></a> [subject\_condition](#input\_subject\_condition) | Condition to use for the GitHub OIDC role. Defaults to `StringLike` | `string` | `"StringLike"` | no |
 | <a name="input_subjects"></a> [subjects](#input\_subjects) | List of GitHub OIDC subjects that are permitted by the trust policy. You do not need to prefix with `repo:` as this is provided. Example: `['my-org/my-repo:*', 'octo-org/octo-repo:ref:refs/heads/octo-branch']` | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to the resources created | `map(any)` | `{}` | no |
 
@@ -104,4 +105,4 @@ No modules.
 | <a name="output_name"></a> [name](#output\_name) | Name of IAM role |
 | <a name="output_path"></a> [path](#output\_path) | Path of IAM role |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | Unique ID of IAM role |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

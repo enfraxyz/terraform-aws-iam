@@ -200,7 +200,7 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   statement {
     actions   = ["ec2:CreateVolume"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
       test     = "StringLike"
@@ -213,7 +213,7 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   statement {
     actions   = ["ec2:CreateVolume"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
       test     = "StringLike"
@@ -231,6 +231,11 @@ data "aws_iam_policy_document" "ebs_csi" {
       variable = "aws:RequestTag/kubernetes.io/cluster/*"
       values   = ["owned"]
     }
+  }
+
+  statement {
+    actions   = ["ec2:CreateVolume"]
+    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
   }
 
   statement {
@@ -447,6 +452,18 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
     ]
     resources = var.mountpoint_s3_csi_path_arns
   }
+
+  dynamic "statement" {
+    for_each = length(var.mountpoint_s3_csi_kms_arns) > 0 ? [1] : []
+    content {
+      actions = [
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+
+      resources = var.mountpoint_s3_csi_kms_arns
+    }
+  }
 }
 
 resource "aws_iam_policy" "mountpoint_s3_csi" {
@@ -531,7 +548,7 @@ data "aws_iam_policy_document" "external_secrets" {
   }
 
   statement {
-    actions   = ["secretsmanager:ListSecrets"]
+    actions   = ["secretsmanager:ListSecrets", "secretsmanager:BatchGetSecretValue"]
     resources = ["*"]
   }
 
@@ -540,7 +557,7 @@ data "aws_iam_policy_document" "external_secrets" {
       "secretsmanager:GetResourcePolicy",
       "secretsmanager:GetSecretValue",
       "secretsmanager:DescribeSecret",
-      "secretsmanager:ListSecretVersionIds",
+      "secretsmanager:ListSecretVersionIds"
     ]
     resources = var.external_secrets_secrets_manager_arns
   }
@@ -628,6 +645,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
       "fsx:DeleteFileSystem",
       "fsx:DescribeFileSystems",
       "fsx:TagResource",
+      "fsx:UpdateFileSystem",
     ]
     resources = ["*"]
   }
@@ -822,6 +840,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "ec2:DescribeTags",
       "ec2:GetCoipPoolUsage",
       "ec2:DescribeCoipPools",
+      "ec2:GetSecurityGroupsForVpc",
       "elasticloadbalancing:DescribeLoadBalancers",
       "elasticloadbalancing:DescribeLoadBalancerAttributes",
       "elasticloadbalancing:DescribeListeners",
@@ -833,6 +852,8 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "elasticloadbalancing:DescribeTargetHealth",
       "elasticloadbalancing:DescribeTags",
       "elasticloadbalancing:DescribeTrustStores",
+      "elasticloadbalancing:DescribeListenerAttributes",
+      "elasticloadbalancing:DescribeCapacityReservation",
     ]
     resources = ["*"]
   }
@@ -994,6 +1015,8 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "elasticloadbalancing:ModifyTargetGroup",
       "elasticloadbalancing:ModifyTargetGroupAttributes",
       "elasticloadbalancing:DeleteTargetGroup",
+      "elasticloadbalancing:ModifyListenerAttributes",
+      "elasticloadbalancing:ModifyCapacityReservation",
     ]
     resources = ["*"]
 
@@ -1389,6 +1412,7 @@ data "aws_iam_policy_document" "velero" {
       "s3:GetObject",
       "s3:DeleteObject",
       "s3:PutObject",
+      "s3:PutObjectTagging",
       "s3:AbortMultipartUpload",
       "s3:ListMultipartUploadParts",
     ]
@@ -1463,6 +1487,21 @@ data "aws_iam_policy_document" "vpc_cni" {
         "ec2:DescribeTags",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeInstanceTypes",
+      ]
+      resources = ["*"]
+    }
+  }
+
+  # https://docs.aws.amazon.com/eks/latest/userguide/cni-network-policy.html#cni-network-policy-setup
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_cloudwatch_logs ? [1] : []
+    content {
+      sid = "CloudWatchLogs"
+      actions = [
+        "logs:DescribeLogGroups",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
       ]
       resources = ["*"]
     }

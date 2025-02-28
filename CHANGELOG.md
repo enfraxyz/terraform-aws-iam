@@ -2,6 +2,137 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.52.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.1...v5.52.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* Fix IAM policy for External Secrets ([#545](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/545)) ([883499c](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/883499c7780b09392c090d7c62160491d0575ce7))
+
+## [5.52.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.0...v5.52.1) (2025-01-02)
+
+
+### Bug Fixes
+
+* Fix creation of inline polices ([#544](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/544)) ([9ec4679](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9ec4679dd237b7285d1d6ae64c72a9169befce16))
+
+## [5.52.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.51.0...v5.52.0) (2024-12-30)
+
+
+### Features
+
+* Allow generic assume role conditions ([#543](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/543)) ([c3e54f2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/c3e54f204b2f8da0f785b4097779ffca980beaaf))
+
+## [5.51.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.50.0...v5.51.0) (2024-12-26)
+
+
+### Features
+
+* Add `BatchGet*` to IAM read only policy ([#540](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/540)) ([d886f11](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d886f11d0aa058555d9e35e195b9a263a0bf6398))
+
+## [5.50.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.49.0...v5.50.0) (2024-12-26)
+
+
+### Features
+
+* Add policies for AWS LBC v2.11.0 ([#539](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/539)) ([ca9f355](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/ca9f35596a91ec8a9d0e44a7fbeb45aea6423d48))
+
+## [5.49.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.48.0...v5.49.0) (2024-12-26)
+
+
+### Features
+
+* Update policie for External Secrets 0.12.1 ([#542](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/542)) ([b609236](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b609236ecdbb782ed758d59dd8c306e935e4b585))
+
+## [5.48.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.47.1...v5.48.0) (2024-11-11)
+
+
+### Features
+
+* Add `ec2:GetSecurityGroupsForVpc` for AWS LB Controller `v2.10.0` ([#536](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/536)) ([9cfab4a](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9cfab4a2712523308b03acf2d370ea44128b4128))
+
+## [5.47.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.47.0...v5.47.1) (2024-10-22)
+
+
+### Bug Fixes
+
+* Use dynamic partition value ([#532](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/532)) ([9986b50](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9986b5041996d33f6998349c675a262c11b7dece))
+
+## [5.47.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.46.0...v5.47.0) (2024-10-21)
+
+
+### Features
+
+* Update AWS EBS CSI Driver IAM Policy ([#530](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/530)) ([1bc058c](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/1bc058c749081f37a67a5d08d24b1fcec449e2f2))
+
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#527](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/527)) ([15fd175](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/15fd17540b6db8be434759e684c1cabf20a5219a))
+
+## [5.46.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.45.0...v5.46.0) (2024-10-04)
+
+
+### Features
+
+* Update IAM policy for AWS Load Balancer Controller to support Listener Attributes ([#525](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/525)) ([966c4f8](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/966c4f8bc7f9a0742a157d6b8a4a80b4f01d6aa1))
+
+## [5.45.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.2...v5.45.0) (2024-10-04)
+
+
+### Features
+
+* Allow modifying the `iam-github-oidc-role` subject condition ([#523](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/523)) ([f2ade86](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/f2ade8680465ae86a509a358051c1571805826c9))
+
+## [5.44.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.1...v5.44.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* Add required S3 PutObjectTagging permission to Velero IRSA policy ([#517](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/517)) ([f0e65a7](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/f0e65a760bf6ddac1344ead5d1f1aaf409c38d18))
+
+## [5.44.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.0...v5.44.1) (2024-09-24)
+
+
+### Bug Fixes
+
+* Ensure IRSA for EKS FSX can Update File Systems ([#520](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/520)) ([b84b3c2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b84b3c2573c3da6223dc963170eec5099e568b0d))
+
+## [5.44.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.43.0...v5.44.0) (2024-08-08)
+
+
+### Features
+
+* Add support for OIDC policy conditions ([#480](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/480)) ([02a5b7f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/02a5b7f35ecdd60498d978166ab2033bbdae5013))
+
+## [5.43.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.42.0...v5.43.0) (2024-08-05)
+
+
+### Features
+
+* Allow changing iss for the github oidc role ([#507](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/507)) ([56e4364](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/56e436441a2064ddfba6db379993127937aa7f28))
+
+## [5.42.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.41.0...v5.42.0) (2024-07-29)
+
+
+### Features
+
+* Add cloudwatch logs policy to vpc-cni for networkpolicy logging ([#504](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/504)) ([88ee443](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/88ee443b60ecaf542ec221eb4aa8a4c4b3bfa70b))
+
+## [5.41.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.40.0...v5.41.0) (2024-07-11)
+
+
+### Features
+
+* Adding sse-kms support for Mountpoint S3 CSI driver EKS IRSA ([#493](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/493)) ([5039e10](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5039e10b5dc3f4129018f3ca19aab68c7e75fbf4))
+
+## [5.40.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.39.1...v5.40.0) (2024-07-05)
+
+
+### Features
+
+* Add support for inline policy creation ([#479](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/479)) ([e13cb1e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e13cb1e5d1356ccb2ddd1bae0ad4c3a17e88eee2))
+
 ## [5.39.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.39.0...v5.39.1) (2024-05-15)
 
 

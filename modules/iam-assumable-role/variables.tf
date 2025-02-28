@@ -16,6 +16,16 @@ variable "trusted_role_services" {
   default     = []
 }
 
+variable "trust_policy_conditions" {
+  description = "[Condition constraints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#condition) applied to the trust policy"
+  type = list(object({
+    test     = string
+    variable = string
+    values   = list(string)
+  }))
+  default = []
+}
+
 variable "mfa_age" {
   description = "Max age of valid MFA (in seconds) for roles which require MFA"
   type        = number
@@ -98,6 +108,12 @@ variable "number_of_custom_role_policy_arns" {
   description = "Number of IAM policies to attach to IAM role"
   type        = number
   default     = null
+}
+
+variable "inline_policy_statements" {
+  description = "List of inline policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) to attach to IAM role as an inline policy"
+  type        = any
+  default     = []
 }
 
 # Pre-defined policies

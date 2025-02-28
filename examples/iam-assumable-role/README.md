@@ -16,7 +16,7 @@ $ terraform apply
 
 Run `terraform destroy` when you don't need these resources.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -37,6 +37,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_iam_assumable_role_admin"></a> [iam\_assumable\_role\_admin](#module\_iam\_assumable\_role\_admin) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_custom"></a> [iam\_assumable\_role\_custom](#module\_iam\_assumable\_role\_custom) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_custom_trust_policy"></a> [iam\_assumable\_role\_custom\_trust\_policy](#module\_iam\_assumable\_role\_custom\_trust\_policy) | ../../modules/iam-assumable-role | n/a |
+| <a name="module_iam_assumable_role_inline_policy"></a> [iam\_assumable\_role\_inline\_policy](#module\_iam\_assumable\_role\_inline\_policy) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_sts"></a> [iam\_assumable\_role\_sts](#module\_iam\_assumable\_role\_sts) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-policy | n/a |
 
@@ -60,4 +61,4 @@ No inputs.
 | <a name="output_iam_role_path"></a> [iam\_role\_path](#output\_iam\_role\_path) | Path of IAM role |
 | <a name="output_iam_role_unique_id"></a> [iam\_role\_unique\_id](#output\_iam\_role\_unique\_id) | Unique ID of IAM role |
 | <a name="output_role_requires_mfa"></a> [role\_requires\_mfa](#output\_role\_requires\_mfa) | Whether admin IAM role requires MFA |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

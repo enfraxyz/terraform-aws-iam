@@ -5,6 +5,7 @@ provider "aws" {
 ###############################
 # IAM assumable role for admin
 ###############################
+
 module "iam_assumable_role_admin" {
   source = "../../modules/iam-assumable-role"
 
@@ -36,7 +37,46 @@ module "iam_assumable_role_admin" {
 ##########################################
 # IAM assumable role with custom policies
 ##########################################
+
 module "iam_assumable_role_custom" {
+  source = "../../modules/iam-assumable-role"
+
+  create_role = true
+
+  trusted_role_arns = [
+    "arn:aws:iam::307990089504:root",
+  ]
+
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+
+  trust_policy_conditions = [
+    {
+      test     = "StringEquals"
+      variable = "aws:PrincipalOrgID"
+      values   = ["o-someorgid"]
+    }
+  ]
+
+  role_name_prefix  = "custom-"
+  role_requires_mfa = false
+
+  role_sts_externalid = "some-id-goes-here"
+
+  custom_role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
+    "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess",
+    module.iam_policy.arn
+  ]
+  #  number_of_custom_role_policy_arns = 3
+}
+
+##########################################
+# IAM assumable role with inline policy
+##########################################
+
+module "iam_assumable_role_inline_policy" {
   source = "../../modules/iam-assumable-role"
 
   trusted_role_arns = [
@@ -54,17 +94,33 @@ module "iam_assumable_role_custom" {
 
   role_sts_externalid = "some-id-goes-here"
 
-  custom_role_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
-    "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess",
-    module.iam_policy.arn
+  inline_policy_statements = [
+    {
+      sid = "AllowECRPushPull"
+      actions = [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:DescribeImages",
+        "ecr:DescribeRepositories",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:ListImages",
+        "ecr:PutImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload"
+      ]
+      effect    = "Allow"
+      resources = ["*"]
+    }
   ]
-  #  number_of_custom_role_policy_arns = 3
 }
 
 ####################################################
 # IAM assumable role with multiple sts external ids
 ####################################################
+
 module "iam_assumable_role_sts" {
   source = "../../modules/iam-assumable-role"
 
@@ -97,6 +153,7 @@ module "iam_assumable_role_sts" {
 #########################################
 # IAM assumable role with custom trust policy
 #########################################
+
 module "iam_assumable_role_custom_trust_policy" {
   source = "../../modules/iam-assumable-role"
 
@@ -136,6 +193,7 @@ data "aws_iam_policy_document" "custom_trust_policy" {
 #########################################
 # IAM policy
 #########################################
+
 module "iam_policy" {
   source = "../../modules/iam-policy"
 
